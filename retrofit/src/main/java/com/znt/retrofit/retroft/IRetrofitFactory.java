@@ -6,15 +6,16 @@ import okhttp3.OkHttpClient;
 import retrofit2.Converter;
 import retrofit2.Retrofit;
 
-/*
- * 项目名:    Pigeon
- * 包名      com.zhon.baselib.mvpbase
- * 文件名:    BaseApi
- * 创建者:    ZJB
- * 创建时间:  2017/5/3 on 14:08
- * 描述:     TODO
+/**
+ * @author: Kern Hu
+ * @emali:
+ * create at: 2019/6/3 11:44.
+ * modify at: 2019/6/3 11:44.
+ * develop version name :
+ * modify version name :
+ * description: This's ...
  */
-public interface SuperBaseApi {
+public interface IRetrofitFactory {
 
     Retrofit getRetrofit();
 

@@ -1,8 +1,9 @@
 package com.znt.data.contact;
 
-import com.znt.retrofit.mvp.SuperBasePresenter;
-import com.znt.retrofit.mvp.SuperBaseView;
-import com.znt.retrofit.proto.RespBody;
+import com.znt.data.body.RespBody;
+import com.znt.retrofit.base.presenter.IRaindropPresenter;
+import com.znt.retrofit.base.view.RaindropView;
+
 
 /**
  * author: Kern Hu
@@ -13,7 +14,7 @@ import com.znt.retrofit.proto.RespBody;
 
 public class ConfigContact {
 
-    public interface view extends SuperBaseView {
+    public interface view extends RaindropView {
 
 
         int getCatId();
@@ -31,7 +32,7 @@ public class ConfigContact {
 
     }
 
-    public interface presenter extends SuperBasePresenter {
+    public interface presenter extends IRaindropPresenter {
 
         void getVideoInfo();
 

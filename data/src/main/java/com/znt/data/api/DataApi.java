@@ -2,7 +2,7 @@ package com.znt.data.api;
 
 import com.znt.data.CmdConnector;
 import com.znt.data.model.DataRetrofitService;
-import com.znt.retrofit.retroft.SuperBaseApiImpl;
+import com.znt.retrofit.retroft.RaindropRetrofitFactory;
 
 /**
  * author: Kern Hu
@@ -11,9 +11,9 @@ import com.znt.retrofit.retroft.SuperBaseApiImpl;
  * describe: This is...
  */
 
-class DataApi extends SuperBaseApiImpl {
+class DataApi extends RaindropRetrofitFactory {
 
-    private static DataApi api = new DataApi(CmdConnector.getCommonHost());
+    private static DataApi api = new DataApi(CmdConnector.getBaseUrl());
 
     public DataApi(String baseUrl) {
         super(baseUrl);

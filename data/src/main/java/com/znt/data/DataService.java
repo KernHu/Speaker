@@ -3,8 +3,8 @@ package com.znt.data;
 import android.content.Intent;
 import android.os.IBinder;
 
-import com.znt.retrofit.mvp.SuperBasePresenter;
-import com.znt.retrofit.mvp.impl.SuperBaseService;
+import com.znt.retrofit.base.SuperBaseService;
+import com.znt.retrofit.base.presenter.IRaindropPresenter;
 
 import androidx.annotation.Nullable;
 
@@ -25,7 +25,17 @@ public class DataService extends SuperBaseService {
     }
 
     @Override
-    public SuperBasePresenter initPresenter() {
+    public IRaindropPresenter initPresenter() {
         return null;
+    }
+
+    @Override
+    public void showLoadingDialog(String msg) {
+
+    }
+
+    @Override
+    public void dismissLoadingDialog() {
+
     }
 }

@@ -1,31 +1,30 @@
-package com.znt.retrofit.mvp.impl;
+package com.znt.retrofit.base;
 
 import android.content.Context;
 import android.os.Bundle;
 
-import com.znt.retrofit.mvp.SuperBasePresenter;
-import com.znt.retrofit.mvp.SuperBaseView;
+import com.znt.retrofit.base.presenter.IRaindropPresenter;
+import com.znt.retrofit.base.view.RaindropView;
 
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import io.reactivex.annotations.Nullable;
 
-
-/*
- * 项目名:    BaseLib
- * 包名       com.zhon.baselib.mvpbase.baseImpl
- * 文件名:    BaseFragment
- * 创建者:    ZJB
- * 创建时间:  2017/9/7 on 14:17
- * 描述:     TODO 基类Fragment
+/**
+ * @author: Kern Hu
+ * @emali:
+ * create at: 2019/6/3 14:26.
+ * modify at: 2019/6/3 14:26.
+ * develop version name :
+ * modify version name :
+ * description: This's ...
  */
-public abstract class SuperBaseFragment<P extends SuperBasePresenter> extends Fragment implements SuperBaseView {
+public abstract class RaindropFragment  <P extends IRaindropPresenter> extends Fragment implements RaindropView {
 
     protected P presenter;
-    private boolean isViewCreate = false;//view是否创建
-    private boolean isViewVisible = false;//view是否可见
+    private boolean isViewCreate = false;
+    private boolean isViewVisible = false;
     public Context context;
-    private boolean isFirst = true;//是否第一次加载
-
+    private boolean isFirst = true;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -63,26 +62,16 @@ public abstract class SuperBaseFragment<P extends SuperBasePresenter> extends Fr
         }
     }
 
-    /**
-     * 懒加载
-     * 让用户可见
-     * 第一次加载
-     */
     protected void firstLoad() {
 
     }
 
-    /**
-     * 懒加载
-     * 让用户可见
-     */
     protected void visibleToUser() {
         if (isFirst) {
             firstLoad();
             isFirst = false;
         }
     }
-
 
     @Override
     public void onDestroyView() {
@@ -94,6 +83,5 @@ public abstract class SuperBaseFragment<P extends SuperBasePresenter> extends Fr
     }
 
     public abstract P initPresenter();
-
 
 }

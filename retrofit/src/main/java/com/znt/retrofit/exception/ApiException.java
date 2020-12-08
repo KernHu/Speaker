@@ -1,17 +1,17 @@
-package com.znt.retrofit.retroft;
+package com.znt.retrofit.exception;
 
-/*
- * 项目名:    Pigeon
- * 包名       cn.hjtech.directory.common.retroft
- * 文件名:    ApiException
- * 创建者:    ZJB
- * 创建时间:  2017/5/19 on 20:45
- * 描述:     TODO 自定义exception 用于访问是是
+/**
+ * @author: Kern Hu
+ * @emali:
+ * create at: 2019/6/3 17:57.
+ * modify at: 2019/6/3 17:57.
+ * develop version name :
+ * modify version name :
+ * description: This's ...
  */
 public class ApiException extends RuntimeException {
 
     private int code;
-
 
     public ApiException(Throwable throwable, int code) {
         super(throwable);
