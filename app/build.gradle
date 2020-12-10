@@ -88,6 +88,7 @@ dependencies {
 
     implementation project(path: ':retrofit')
     implementation project(path: ':data')
+    implementation project(path: ':utils')
 
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'

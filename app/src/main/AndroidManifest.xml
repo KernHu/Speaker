@@ -17,8 +17,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <service
-            android:name="com.znt.data.DataService"
+            android:name="com.znt.data.DataBindingService"
             android:process=":data" />
     </application>
 
