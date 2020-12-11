@@ -1,7 +1,7 @@
 package com.znt.data.model;
 
 
-import com.znt.data.body.RespBody;
+import com.znt.data.RespBody;
 
 import io.reactivex.Observable;
 import retrofit2.http.POST;

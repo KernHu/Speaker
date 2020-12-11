@@ -4,6 +4,8 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
 
+import com.znt.data.request.ConfigRequest;
+
 import androidx.annotation.Nullable;
 
 /**
@@ -15,10 +17,11 @@ import androidx.annotation.Nullable;
 
 public class DataBindingService extends Service {
 
+
     @Override
     public void onCreate() {
         super.onCreate();
-
+        ConfigRequest.getInstance().onCreate();
     }
 
     @Nullable
@@ -30,8 +33,8 @@ public class DataBindingService extends Service {
 
     @Override
     public void onDestroy() {
-
         super.onDestroy();
+        ConfigRequest.getInstance().onDestroy();
     }
 
 

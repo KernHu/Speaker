@@ -1,7 +1,6 @@
-package com.znt.data.body;
+package com.znt.data;
 
 import com.google.gson.JsonElement;
-import com.znt.retrofit.common.BaseResponse;
 
 /**
  * author: Kern Hu
@@ -10,7 +9,7 @@ import com.znt.retrofit.common.BaseResponse;
  * describe: This is...
  */
 
-public class RespBody extends BaseResponse {
+public class RespBody {
 
     String resultcode;
 

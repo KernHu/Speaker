@@ -11,13 +11,13 @@ import com.znt.data.DataBindingService;
 
 public class MainActivity extends BaseActivity {
 
+    private boolean connection;
     private IDataBindingAidl mDataBindingAidl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         initView();
         bindEvent();
         bindDate();
@@ -32,16 +32,11 @@ public class MainActivity extends BaseActivity {
     protected void bindEvent() {
         super.bindEvent();
 
-        mIntent = new Intent(this, DataBindingService.class);
-        bindService(mIntent, mServiceConnection, Context.BIND_AUTO_CREATE);
-
     }
 
     @Override
     protected void bindDate() {
         super.bindDate();
-
-
         //mDataBindingAidl.basicTypes();
     }
 
@@ -56,28 +51,42 @@ public class MainActivity extends BaseActivity {
     }
 
     @Override
-    protected void onTicktack() {
-        super.onTicktack();
-    }
-
-    @Override
     protected void onDestroy() {
         super.onDestroy();
         unbindService(mServiceConnection);
     }
 
+    @Override
+    protected void onTicktack() {
+        super.onTicktack();
+        if (!connection) {
+            startService();
+        }
+    }
 
+
+    private void startService() {
+        mIntent = new Intent(this, DataBindingService.class);
+        bindService(mIntent, mServiceConnection, Context.BIND_AUTO_CREATE);
+    }
+
+    /**********************************************************************************************/
+    /**********************************************************************************************/
+    /**********************************************************************************************/
     ServiceConnection mServiceConnection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
+            connection = true;
             mDataBindingAidl = IDataBindingAidl.Stub.asInterface(iBinder);
         }
 
         @Override
         public void onServiceDisconnected(ComponentName componentName) {
-            //断开重连
-
+            connection = false;
         }
     };
+    /**********************************************************************************************/
+    /**********************************************************************************************/
+    /**********************************************************************************************/
 
 }

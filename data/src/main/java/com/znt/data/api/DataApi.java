@@ -11,7 +11,7 @@ import com.znt.retrofit.retroft.RaindropRetrofitFactory;
  * describe: This is...
  */
 
-class DataApi extends RaindropRetrofitFactory {
+public class DataApi extends RaindropRetrofitFactory {
 
     private static DataApi api = new DataApi(CmdConnector.getBaseUrl());
 

@@ -26,18 +26,14 @@ import androidx.appcompat.app.AppCompatActivity;
 public class BaseActivity extends AppCompatActivity implements Handler.Callback {
 
     protected Intent mIntent;
-
     private Handler mHandler = new Handler(this);
-
     private ScheduledExecutorService mScheduledExecutorService = Executors.newScheduledThreadPool(1);
-
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         mScheduledExecutorService
-                .scheduleAtFixedRate(mScheduleRunnable, 0, 5000, TimeUnit.MILLISECONDS);
+                .scheduleAtFixedRate(mScheduleRunnable, 0, 12000, TimeUnit.MILLISECONDS);
     }
 
 

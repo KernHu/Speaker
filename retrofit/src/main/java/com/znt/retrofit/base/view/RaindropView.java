@@ -11,8 +11,4 @@ package com.znt.retrofit.base.view;
  */
 public interface RaindropView {
 
-    void showLoadingDialog(String msg);
-
-    void dismissLoadingDialog();
-
 }
