@@ -1,5 +1,7 @@
 package com.znt.data.request;
 
+import android.util.Log;
+
 import com.google.gson.Gson;
 import com.znt.data.RespBody;
 import com.znt.data.body.AddboxRequestBody;
@@ -14,6 +16,7 @@ import com.znt.data.contact.ConfigContact;
 import com.znt.data.entity.InitConfigInfo;
 import com.znt.data.presenter.ConfigPresenter;
 import com.znt.retrofit.base.BaseRequest;
+import com.znt.retrofit.common.ExceptionTags;
 
 /**
  * author: Kern Hu
@@ -23,6 +26,19 @@ import com.znt.retrofit.base.BaseRequest;
  */
 
 public class ConfigRequest extends BaseRequest<ConfigContact.presenter> implements ConfigContact.view {
+
+    public enum Type {
+
+        REQ_INIT,
+        REQ_ADDBOX,
+        REQ_REGISTER,
+        REQ_LOGIN,
+        REQ_STATUS,
+        REQ_LAST_VERSION,
+        REQ_WIFI,
+        REQ_UPDATE,
+
+    }
 
     private static ConfigRequest mConfigRequest;
 
@@ -34,6 +50,7 @@ public class ConfigRequest extends BaseRequest<ConfigContact.presenter> implemen
     private LastVersionRequestBody lastVersionRequestBody;
     private WifiRequestBody wifiRequestBody;
     private UpdateRequestBody updateRequestBody;
+    private Type type;
 
     public static ConfigRequest getInstance() {
         if (mConfigRequest == null) {
@@ -79,6 +96,11 @@ public class ConfigRequest extends BaseRequest<ConfigContact.presenter> implemen
 
     public ConfigRequest setUpdateRequestBody(UpdateRequestBody updateRequestBody) {
         this.updateRequestBody = updateRequestBody;
+        return this;
+    }
+
+    public ConfigRequest setType(Type type) {
+        this.type = type;
         return this;
     }
 
@@ -137,18 +159,78 @@ public class ConfigRequest extends BaseRequest<ConfigContact.presenter> implemen
         return updateRequestBody;
     }
 
+    public void build() {
+
+        switch (type) {
+
+            case REQ_INIT:
+
+                if (presenter != null)
+                    presenter.getTerminalInit();
+
+                break;
+            case REQ_ADDBOX:
+
+                if (presenter != null)
+                    presenter.getTerminalAddbox();
+
+                break;
+            case REQ_REGISTER:
+
+                if (presenter != null)
+                    presenter.getTerminalRegister();
+
+                break;
+            case REQ_LOGIN:
+
+                if (presenter != null)
+                    presenter.getTerminalLogin();
+
+                break;
+            case REQ_STATUS:
+
+                if (presenter != null)
+                    presenter.getTerminalStatus();
+
+                break;
+            case REQ_UPDATE:
+
+                if (presenter != null)
+                    presenter.getTerminalUpdate();
+
+                break;
+            case REQ_WIFI:
+
+                if (presenter != null)
+                    presenter.getTerminalWifi();
+
+                break;
+            case REQ_LAST_VERSION:
+
+                if (presenter != null)
+                    presenter.getTerminalLastVersion();
+
+                break;
+        }
+    }
+
+    /*******************************************************************/
     @Override
     public void setTerminalInitSuccess(RespBody data) {
+        Log.e("sos", "InitConfigInfo>>>" + data.toString());
+        if (!RespBody.CODE_SUCCESS.equals(data.getResultcode())) {
+            setTerminalInitFailure(ExceptionTags.API_ERROR, data.getMessage());
+        } else {
+            InitConfigInfo info = new Gson().fromJson(data.getData().toString(), InitConfigInfo.class);
 
-        if (data.getResultcode() == "200") {
-            InitConfigInfo info = new Gson().fromJson(data.getData(), InitConfigInfo.class);
+            //
+            //Log.e("sos", "InitConfigInfo>>>" + info.toString());
         }
-
     }
 
     @Override
     public void setTerminalInitFailure(String tag, String error) {
-
+        Log.e("sos", "setTerminalInitFailure>>>" + tag + ";;error>>>" + error);
     }
 
     @Override

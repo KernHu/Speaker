@@ -1,10 +1,12 @@
-package com.znt.speaker.app;
+package com.znt.data.app;
 
 import android.app.Application;
 
+import com.znt.data.BuildConfig;
 import com.znt.data.CmdConnector;
 import com.znt.retrofit.RaindropConfig;
-import com.znt.speaker.BuildConfig;
+
+import okhttp3.logging.HttpLoggingInterceptor;
 
 /**
  * author: Kern Hu
@@ -30,7 +32,7 @@ public class AppSdk extends Application {
                 .setRetryOnConnectionFailure(true)
                 .setLogPrintable(BuildConfig.DEBUG)
                 .setBaseUrl(CmdConnector.getBaseUrl())
-                //.setLogLevel(HttpLoggingInterceptor.Level.BODY)
+                .setLogLevel(HttpLoggingInterceptor.Level.BODY)
                 .build();
 
     }

@@ -6,13 +6,19 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.os.RemoteException;
+import android.util.Log;
 
+import com.znt.data.DataBindingBinder;
 import com.znt.data.DataBindingService;
 
 public class MainActivity extends BaseActivity {
 
+    public static final int MAX_COUNT = 12;
     private boolean connection;
-    private IDataBindingAidl mDataBindingAidl;
+    private DataBindingBinder mDataBindingBinder;
+    private int counter = 1;
+    private boolean isInit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +32,7 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void initView() {
         super.initView();
+        startService();
     }
 
     @Override
@@ -54,13 +61,29 @@ public class MainActivity extends BaseActivity {
     protected void onDestroy() {
         super.onDestroy();
         unbindService(mServiceConnection);
+        connection = false;
     }
 
+    /**********************************************************************************************/
+    /**********************************************************************************************/
+    /**********************************************************************************************/
+
+
+    /**
+     * 心跳 12s/count
+     */
     @Override
     protected void onTicktack() {
         super.onTicktack();
         if (!connection) {
             startService();
+        } else {
+            if (counter % MAX_COUNT == 1) {
+                counter = 0;
+                counter++;
+
+                loadData();
+            }
         }
     }
 
@@ -70,23 +93,42 @@ public class MainActivity extends BaseActivity {
         bindService(mIntent, mServiceConnection, Context.BIND_AUTO_CREATE);
     }
 
-    /**********************************************************************************************/
-    /**********************************************************************************************/
-    /**********************************************************************************************/
     ServiceConnection mServiceConnection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
             connection = true;
-            mDataBindingAidl = IDataBindingAidl.Stub.asInterface(iBinder);
+            Log.e("sos", "onServiceConnected>>>" + connection);
+            mDataBindingBinder = DataBindingBinder.Stub.asInterface(iBinder);
         }
 
         @Override
         public void onServiceDisconnected(ComponentName componentName) {
             connection = false;
+            Log.e("sos", "onServiceDisconnected>>>" + connection);
         }
     };
     /**********************************************************************************************/
     /**********************************************************************************************/
     /**********************************************************************************************/
+
+    private void loadData(){
+
+        loadInit();
+
+    }
+
+    private void loadInit() {
+        if (isInit) {
+            return;
+        }
+        isInit = true;
+        try {
+            if (mDataBindingBinder != null) {
+                mDataBindingBinder.getTerminalInit();
+            }
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+    }
 
 }

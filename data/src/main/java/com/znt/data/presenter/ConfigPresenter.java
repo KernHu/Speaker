@@ -1,9 +1,10 @@
 package com.znt.data.presenter;
 
 import android.annotation.SuppressLint;
+import android.util.Log;
 
 import com.znt.data.RespBody;
-import com.znt.data.api.DataApi;
+import com.znt.data.model.api.DataApi;
 import com.znt.data.body.InitRequestBody;
 import com.znt.data.contact.ConfigContact;
 import com.znt.retrofit.base.presenter.RaindropPresenter;
@@ -35,10 +36,9 @@ public class ConfigPresenter extends RaindropPresenter<ConfigContact.view> imple
     public void getTerminalInit() {
 
         InitRequestBody body = view.getInitRequestBody();
-
         DataApi
                 .getInstance()
-                .terminalInit(body.getId(), body.getSoftVersion(), body.getSoftVersion())
+                .terminalInit(body.getId(), body.getSoftVersion(), body.getHardVersion())
                 .subscribeOn(Schedulers.io())
                 .doOnSubscribe(new Consumer<Disposable>() {
                     @Override

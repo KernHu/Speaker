@@ -59,7 +59,7 @@ public class RaindropRetrofitFactory implements IRetrofitFactory {
                                 .connectTimeout(Config.connectTimeout, TimeUnit.SECONDS)
                                 .writeTimeout(Config.writeTimeout, TimeUnit.SECONDS)
                                 .addNetworkInterceptor(new NetWorkInterceptor())
-                                .cookieJar(new NewCookieJar())
+                                //.cookieJar(new NewCookieJar())
                                 .retryOnConnectionFailure(Config.retryOnConnectionFailure)
                                 .build()
                 );

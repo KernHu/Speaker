@@ -2,11 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.znt.speaker">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
     <application
+        android:name="com.znt.data.app.AppBase"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:networkSecurityConfig="@xml/network_config"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Speaker">
@@ -22,5 +23,9 @@
             android:name="com.znt.data.DataBindingService"
             android:process=":data" />
     </application>
+
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>

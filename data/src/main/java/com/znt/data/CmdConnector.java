@@ -17,9 +17,9 @@ public class CmdConnector {
     private static final String HTTPS = "https://";
 
     //测试网host
-    private static final String HOST_TEST = "192.168.1.148:10401";
+    private static final String HOST_TEST = "dev.storesound.com:33333";
     //正式网host
-    private static final String HOST_OFFICIAL = "ad.szprize.cn";
+    private static final String HOST_OFFICIAL = "dev.storesound.com:33333";
 
 
     public static String getBaseUrl() {

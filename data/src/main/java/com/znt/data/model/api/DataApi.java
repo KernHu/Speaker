@@ -1,4 +1,4 @@
-package com.znt.data.api;
+package com.znt.data.model.api;
 
 import com.znt.data.CmdConnector;
 import com.znt.data.model.DataRetrofitService;

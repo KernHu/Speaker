@@ -32,23 +32,22 @@ public class BaseActivity extends AppCompatActivity implements Handler.Callback 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        /**********************************************/
         mScheduledExecutorService
-                .scheduleAtFixedRate(mScheduleRunnable, 0, 12000, TimeUnit.MILLISECONDS);
+                .scheduleAtFixedRate(mScheduleRunnable, 0, 1000, TimeUnit.MILLISECONDS);
+        /**********************************************/
     }
 
 
     @Override
     protected void onResume() {
         super.onResume();
-
-
+        onTicktack();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-
-
     }
 
     @Override
@@ -104,7 +103,7 @@ public class BaseActivity extends AppCompatActivity implements Handler.Callback 
      */
     protected void onTicktack() {
 
-        Log.d("Ticktack", "onTicktack=" + DateTimeTools.todayHhMmSs());
+        Log.d("sos", "onTicktack=" + DateTimeTools.todayHhMmSs());
 
     }
 }

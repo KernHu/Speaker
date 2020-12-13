@@ -11,6 +11,10 @@ import com.google.gson.JsonElement;
 
 public class RespBody {
 
+    public static final String CODE_SUCCESS = "1";
+    public static final String CODE_FAILURE = "0";
+    public static final String CODE_TOKEN_INVALID = "-10";
+
     String resultcode;
 
     String message;

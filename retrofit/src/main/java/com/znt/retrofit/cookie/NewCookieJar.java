@@ -19,7 +19,8 @@ import okhttp3.HttpUrl;
  */
 public class NewCookieJar implements CookieJar {
 
-    private LinkedHashMap<String, List<Cookie>> cookieMap;
+    private LinkedHashMap<String, List<Cookie>> cookieMap = new LinkedHashMap<>();
+
 
     @Override
     public void saveFromResponse(HttpUrl url, List<Cookie> cookies) {
