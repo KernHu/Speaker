@@ -67,4 +67,16 @@ public class InitConfigInfo implements Parcelable {
         parcel.writeString(customize);
         parcel.writeString(companyname);
     }
+
+    @Override
+    public String toString() {
+        return "InitConfigInfo{" +
+                "id='" + id + '\'' +
+                ", serverIp='" + serverIp + '\'' +
+                ", systemTime='" + systemTime + '\'' +
+                ", trs=" + trs +
+                ", customize='" + customize + '\'' +
+                ", companyname='" + companyname + '\'' +
+                '}';
+    }
 }

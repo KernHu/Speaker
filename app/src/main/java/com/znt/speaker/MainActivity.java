@@ -11,6 +11,7 @@ import android.util.Log;
 
 import com.znt.data.DataBindingBinder;
 import com.znt.data.DataBindingService;
+import com.znt.data.app.AppBase;
 
 public class MainActivity extends BaseActivity {
 
@@ -81,7 +82,6 @@ public class MainActivity extends BaseActivity {
             if (counter % MAX_COUNT == 1) {
                 counter = 0;
                 counter++;
-
                 loadData();
             }
         }
@@ -97,26 +97,30 @@ public class MainActivity extends BaseActivity {
         @Override
         public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
             connection = true;
-            Log.e("sos", "onServiceConnected>>>" + connection);
             mDataBindingBinder = DataBindingBinder.Stub.asInterface(iBinder);
         }
 
         @Override
         public void onServiceDisconnected(ComponentName componentName) {
             connection = false;
-            Log.e("sos", "onServiceDisconnected>>>" + connection);
         }
     };
     /**********************************************************************************************/
     /**********************************************************************************************/
     /**********************************************************************************************/
 
-    private void loadData(){
-
-        loadInit();
+    private void loadData() {
+        if (AppBase.getApp().getId() <= 0) {
+            loadAddBox();
+        } else {
+            loadInit();
+        }
 
     }
 
+    /**
+     *
+     */
     private void loadInit() {
         if (isInit) {
             return;
@@ -131,4 +135,16 @@ public class MainActivity extends BaseActivity {
         }
     }
 
+    /**
+     *
+     */
+    private void loadAddBox() {
+        try {
+            if (mDataBindingBinder != null) {
+                mDataBindingBinder.getTerminalAddbox();
+            }
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+    }
 }

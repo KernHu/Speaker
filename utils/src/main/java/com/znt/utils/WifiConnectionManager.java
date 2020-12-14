@@ -205,4 +205,16 @@ public class WifiConnectionManager {
         return mWifiManager;
     }
 
+    public String getSSID() {
+        String ssid = "";
+        if (mWifiManager.getConnectionInfo() != null && mWifiManager.getConnectionInfo().getSSID() != null) {
+            mWifiManager.getConnectionInfo().getSSID();
+        }
+        return ssid;
+    }
+
+    public String getPassword() {
+        String password = "";
+        return password;
+    }
 }

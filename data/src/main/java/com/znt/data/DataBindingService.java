@@ -6,10 +6,14 @@ import android.os.IBinder;
 import android.os.RemoteException;
 
 import com.znt.data.app.AppBase;
+import com.znt.data.body.AddboxRequestBody;
 import com.znt.data.body.InitRequestBody;
 import com.znt.data.request.ConfigRequest;
 import com.znt.utils.AppUtils;
+import com.znt.utils.DeviceUtils;
+import com.znt.utils.LocationUtils;
 import com.znt.utils.SystemUtils;
+import com.znt.utils.WifiConnectionManager;
 
 import androidx.annotation.Nullable;
 
@@ -50,27 +54,42 @@ public class DataBindingService extends Service {
             body.setId(String.valueOf(AppBase.getApp().getId()));
             body.setHardVersion(SystemUtils.getSystemVersion());
             body.setSoftVersion(String.valueOf(AppUtils.getVersionCode(getBaseContext())));
-
             ConfigRequest
                     .getInstance()
                     .setType(ConfigRequest.Type.REQ_INIT)
-                    .setInitRequestBody(body)
+                    .setRequestBody(body)
                     .build();
+
         }
 
         @Override
         public void getTerminalAddbox() throws RemoteException {
 
-        }
+            AddboxRequestBody body = new AddboxRequestBody();
+            body.setCode(DeviceUtils.getMacAddress(getBaseContext()));
+            body.setSoftCode(String.valueOf(AppUtils.getVersionCode(getBaseContext())));
+            body.setHardVersion(SystemUtils.getSystemVersion());
+            body.setTerminalType(AddboxRequestBody.TYPE_BOX);
+            body.setVolume("10");
+            body.setVideoWhirl("0");
+            body.setWifiName(WifiConnectionManager.getInstance(getBaseContext()).getSSID());
+            //body.setWifiPassword(WifiConnectionManager.getInstance(getBaseContext()).getPassword());
+            body.setIp(WifiConnectionManager.getInstance(getBaseContext()).getLocalIp());
+            //body.setNetInfo("");
+            double[] location = LocationUtils.getLastKnownLocation(getBaseContext());
+            body.setLatitude(String.valueOf(location[0]));
+            body.setLongitude(String.valueOf(location[1]));
+            body.setAddress("");
+            body.setCountry("China");
+            body.setProvince("ShenZhen");
+            body.setRegion("");
+            body.setOldId("");
 
-        @Override
-        public void getTerminalRegister() throws RemoteException {
-
-        }
-
-        @Override
-        public void getTerminalLogin() throws RemoteException {
-
+            ConfigRequest
+                    .getInstance()
+                    .setType(ConfigRequest.Type.REQ_ADDBOX)
+                    .setRequestBody(body)
+                    .build();
         }
 
         @Override

@@ -4,6 +4,8 @@ import android.annotation.SuppressLint;
 import android.util.Log;
 
 import com.znt.data.RespBody;
+import com.znt.data.body.AddboxRequestBody;
+import com.znt.data.body.LoginRequestBody;
 import com.znt.data.model.api.DataApi;
 import com.znt.data.body.InitRequestBody;
 import com.znt.data.contact.ConfigContact;
@@ -38,7 +40,7 @@ public class ConfigPresenter extends RaindropPresenter<ConfigContact.view> imple
         InitRequestBody body = view.getInitRequestBody();
         DataApi
                 .getInstance()
-                .terminalInit(body.getId(), body.getSoftVersion(), body.getHardVersion())
+                .terminalInit(body)
                 .subscribeOn(Schedulers.io())
                 .doOnSubscribe(new Consumer<Disposable>() {
                     @Override
@@ -70,20 +72,45 @@ public class ConfigPresenter extends RaindropPresenter<ConfigContact.view> imple
 
     }
 
+    @SuppressLint("CheckResult")
     @Override
     public void getTerminalAddbox() {
 
+        AddboxRequestBody body = view.getAddboxRequestBody();
+        DataApi
+                .getInstance()
+                .terminalAddbox(body)
+                .subscribeOn(Schedulers.io())
+                .doOnSubscribe(new Consumer<Disposable>() {
+                    @Override
+                    public void accept(Disposable disposable) throws Exception {
+                        addDisposable(disposable);
+                    }
+                })
+                .map(new Function<RespBody, RespBody>() {
+
+                    @Override
+                    public RespBody apply(RespBody resp) throws Exception {
+                        return resp;
+                    }
+                })
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<RespBody>() {
+
+                    @Override
+                    public void accept(RespBody resp) throws Exception {
+                        view.setTerminalAddboxSuccess(resp);
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        view.setTerminalAddboxFailure(ExceptionTags.THROWABLE, throwable.toString());
+                        ExceptionHelper.handleException(throwable);
+                    }
+                });
+
     }
 
-    @Override
-    public void getTerminalRegister() {
-
-    }
-
-    @Override
-    public void getTerminalLogin() {
-
-    }
 
     @Override
     public void getTerminalStatus() {

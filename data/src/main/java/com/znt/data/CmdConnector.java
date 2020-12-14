@@ -23,7 +23,8 @@ public class CmdConnector {
 
 
     public static String getBaseUrl() {
-        return BuildConfig.DEBUG ? HTTP + HOST_TEST : HTTP + HOST_OFFICIAL;
+        //return BuildConfig.DEBUG ? HTTP + HOST_TEST : HTTP + HOST_OFFICIAL;
+        return "http://dev.storesound.com:33333";
     }
 
 }

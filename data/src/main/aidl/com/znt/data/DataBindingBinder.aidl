@@ -16,16 +16,12 @@ interface DataBindingBinder {
 
  void getTerminalAddbox();
 
-  void getTerminalRegister();
+ void getTerminalStatus();
 
-   void getTerminalLogin();
+ void getTerminalLastVersion();
 
-    void getTerminalStatus();
+ void getTerminalWifi();
 
-     void getTerminalLastVersion();
-
-      void getTerminalWifi();
-
-       void getTerminalUpdate();
+ void getTerminalUpdate();
 
 }

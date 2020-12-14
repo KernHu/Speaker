@@ -1,11 +1,9 @@
 package com.znt.data.contact;
 
+import com.znt.data.RespBody;
 import com.znt.data.body.AddboxRequestBody;
 import com.znt.data.body.InitRequestBody;
 import com.znt.data.body.LastVersionRequestBody;
-import com.znt.data.body.LoginRequestBody;
-import com.znt.data.body.RegisterRequestBody;
-import com.znt.data.RespBody;
 import com.znt.data.body.StatusRequestBody;
 import com.znt.data.body.UpdateRequestBody;
 import com.znt.data.body.WifiRequestBody;
@@ -29,10 +27,6 @@ public class ConfigContact {
 
         AddboxRequestBody getAddboxRequestBody();
 
-        RegisterRequestBody getRegisterRequestBody();
-
-        LoginRequestBody getLoginRequestBody();
-
         StatusRequestBody getStatusRequestBody();
 
         LastVersionRequestBody getLastVersionRequestBody();
@@ -49,14 +43,6 @@ public class ConfigContact {
         void setTerminalAddboxSuccess(RespBody data);
 
         void setTerminalAddboxFailure(String tag, String error);
-
-        void setTerminalRegisterSuccess(RespBody data);
-
-        void setTerminalRegisterFailure(String tag, String error);
-
-        void setTerminalLoginSuccess(RespBody data);
-
-        void setTerminalLoginFailure(String tag, String error);
 
         void setTerminalStatusSuccess(RespBody data);
 
@@ -82,10 +68,6 @@ public class ConfigContact {
         void getTerminalInit();
 
         void getTerminalAddbox();
-
-        void getTerminalRegister();
-
-        void getTerminalLogin();
 
         void getTerminalStatus();
 

@@ -1,7 +1,7 @@
 package com.znt.data.model.api;
 
-import com.znt.data.CmdConnector;
 import com.znt.data.model.DataRetrofitService;
+import com.znt.retrofit.Config;
 import com.znt.retrofit.retroft.RaindropRetrofitFactory;
 
 /**
@@ -13,7 +13,7 @@ import com.znt.retrofit.retroft.RaindropRetrofitFactory;
 
 public class DataApi extends RaindropRetrofitFactory {
 
-    private static DataApi api = new DataApi(CmdConnector.getBaseUrl());
+    private static DataApi api = new DataApi(Config.baseUrl);
 
     public DataApi(String baseUrl) {
         super(baseUrl);

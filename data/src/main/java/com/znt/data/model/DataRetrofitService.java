@@ -2,8 +2,11 @@ package com.znt.data.model;
 
 
 import com.znt.data.RespBody;
+import com.znt.data.body.AddboxRequestBody;
+import com.znt.data.body.InitRequestBody;
 
 import io.reactivex.Observable;
+import retrofit2.http.Body;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
 
@@ -21,55 +24,19 @@ public interface DataRetrofitService {
      *
      * @return
      */
-    @POST("api/terminal/init/")
+    @POST("api/terminal/init")
     Observable<RespBody> terminalInit(
-            @Query("id") String id,
-            @Query("softVersion") String softVersion,
-            @Query("hardVersion") String hardVersion
+            @Body InitRequestBody body
     );
 
     /**
-     * 盒子注册接口
+     * 盒子注册接口 AddboxRequestBody
      *
      * @return
      */
     @POST("api/terminal/addbox")
     Observable<RespBody> terminalAddbox(
-            @Query("code") String code,
-            @Query("softCode") String softCode,
-            @Query("softVersion") String softVersion,
-            @Query("hardVersion") String hardVersion,
-            @Query("terminalType") String terminalType,  //1-pc 2-box 3-tv，4-ipad不传服务根据softcode判断
-            @Query("longitude") String longitude,
-            @Query("latitude") String latitude
-    );
-
-
-    /**
-     * 注册接口
-     *
-     * @return
-     */
-    @POST("api/terminal/register")
-    Observable<RespBody> terminalRegister(
-            @Query("id") String id,
-            @Query("shopName") String shopName,
-            @Query("bindCode") String bindCode,
-            @Query("softCode") String softCode,
-            @Query("softVersion") String softVersion,
-            @Query("hardVersion") String hardVersion,
-            @Query("longitude") String longitude,
-            @Query("latitude") String latitude
-    );
-
-    /**
-     * 登陆接口
-     *
-     * @return
-     */
-    @POST("api/terminal/login")
-    Observable<RespBody> terminalLogin(
-            @Query("id") String id
+            @Body AddboxRequestBody body
     );
 
     /**
