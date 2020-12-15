@@ -69,21 +69,21 @@ public class DataBindingService extends Service {
             body.setCode(DeviceUtils.getMacAddress(getBaseContext()));
             body.setSoftCode(String.valueOf(AppUtils.getVersionCode(getBaseContext())));
             body.setHardVersion(SystemUtils.getSystemVersion());
-            body.setTerminalType(AddboxRequestBody.TYPE_BOX);
-            body.setVolume("10");
-            body.setVideoWhirl("0");
-            body.setWifiName(WifiConnectionManager.getInstance(getBaseContext()).getSSID());
-            //body.setWifiPassword(WifiConnectionManager.getInstance(getBaseContext()).getPassword());
-            body.setIp(WifiConnectionManager.getInstance(getBaseContext()).getLocalIp());
-            //body.setNetInfo("");
-            double[] location = LocationUtils.getLastKnownLocation(getBaseContext());
-            body.setLatitude(String.valueOf(location[0]));
-            body.setLongitude(String.valueOf(location[1]));
-            body.setAddress("");
-            body.setCountry("China");
-            body.setProvince("ShenZhen");
-            body.setRegion("");
-            body.setOldId("");
+//            body.setTerminalType(AddboxRequestBody.TYPE_BOX);
+//            body.setVolume("10");
+//            body.setVideoWhirl("0");
+//            body.setWifiName(WifiConnectionManager.getInstance(getBaseContext()).getSSID());
+//            //body.setWifiPassword(WifiConnectionManager.getInstance(getBaseContext()).getPassword());
+//            body.setIp(WifiConnectionManager.getInstance(getBaseContext()).getLocalIp());
+//            //body.setNetInfo("");
+//            double[] location = LocationUtils.getLastKnownLocation(getBaseContext());
+//            body.setLatitude(String.valueOf(location[0]));
+//            body.setLongitude(String.valueOf(location[1]));
+//            body.setAddress("SHE");
+//            body.setCountry("China");
+//            body.setProvince("ShenZhen");
+//            body.setRegion("");
+//            body.setOldId("0");
 
             ConfigRequest
                     .getInstance()

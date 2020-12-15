@@ -30,8 +30,8 @@ public interface DataRetrofitService {
     );
 
     /**
-     * 盒子注册接口 AddboxRequestBody
-     *
+     * 盒子注册接口AddboxRequestBody
+     *  api/terminal/addbox
      * @return
      */
     @POST("api/terminal/addbox")

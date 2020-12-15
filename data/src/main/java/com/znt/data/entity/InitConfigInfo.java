@@ -12,33 +12,36 @@ import android.os.Parcelable;
 
 public class InitConfigInfo implements Parcelable {
 
-    private String id;
+    private String code;
     private String serverIp;
     private String systemTime;
-    private TbTerminalRunstatus trs;
     private String customize;
     private String companyname;
+    private TbTerminalRunstatus trs;
 
-
-    public InitConfigInfo(String id, String serverIp, String systemTime, TbTerminalRunstatus trs, String customize, String companyname) {
-        this.id = id;
-        this.serverIp = serverIp;
-        this.systemTime = systemTime;
-        this.trs = trs;
-        this.customize = customize;
-        this.companyname = companyname;
-    }
-
-    public InitConfigInfo() {
-    }
 
     protected InitConfigInfo(Parcel in) {
-        id = in.readString();
+        code = in.readString();
         serverIp = in.readString();
         systemTime = in.readString();
-        trs = in.readParcelable(TbTerminalRunstatus.class.getClassLoader());
         customize = in.readString();
         companyname = in.readString();
+        trs = in.readParcelable(TbTerminalRunstatus.class.getClassLoader());
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(code);
+        dest.writeString(serverIp);
+        dest.writeString(systemTime);
+        dest.writeString(customize);
+        dest.writeString(companyname);
+        dest.writeParcelable(trs, flags);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
     public static final Creator<InitConfigInfo> CREATOR = new Creator<InitConfigInfo>() {
@@ -53,30 +56,51 @@ public class InitConfigInfo implements Parcelable {
         }
     };
 
-    @Override
-    public int describeContents() {
-        return 0;
+    public String getCode() {
+        return code;
     }
 
-    @Override
-    public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeString(id);
-        parcel.writeString(serverIp);
-        parcel.writeString(systemTime);
-        parcel.writeParcelable(trs, i);
-        parcel.writeString(customize);
-        parcel.writeString(companyname);
+    public void setCode(String code) {
+        this.code = code;
     }
 
-    @Override
-    public String toString() {
-        return "InitConfigInfo{" +
-                "id='" + id + '\'' +
-                ", serverIp='" + serverIp + '\'' +
-                ", systemTime='" + systemTime + '\'' +
-                ", trs=" + trs +
-                ", customize='" + customize + '\'' +
-                ", companyname='" + companyname + '\'' +
-                '}';
+    public String getServerIp() {
+        return serverIp;
+    }
+
+    public void setServerIp(String serverIp) {
+        this.serverIp = serverIp;
+    }
+
+    public String getSystemTime() {
+        return systemTime;
+    }
+
+    public void setSystemTime(String systemTime) {
+        this.systemTime = systemTime;
+    }
+
+    public String getCustomize() {
+        return customize;
+    }
+
+    public void setCustomize(String customize) {
+        this.customize = customize;
+    }
+
+    public String getCompanyname() {
+        return companyname;
+    }
+
+    public void setCompanyname(String companyname) {
+        this.companyname = companyname;
+    }
+
+    public TbTerminalRunstatus getTrs() {
+        return trs;
+    }
+
+    public void setTrs(TbTerminalRunstatus trs) {
+        this.trs = trs;
     }
 }

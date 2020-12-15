@@ -110,12 +110,7 @@ public class MainActivity extends BaseActivity {
     /**********************************************************************************************/
 
     private void loadData() {
-        if (AppBase.getApp().getId() <= 0) {
-            loadAddBox();
-        } else {
-            loadInit();
-        }
-
+        loadInit();
     }
 
     /**
