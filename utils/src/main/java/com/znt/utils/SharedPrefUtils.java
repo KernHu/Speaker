@@ -27,7 +27,7 @@ public class SharedPrefUtils {
 
     private static SharedPreferences getInstance(Context context) {
         if (mInstance == null) {
-            mInstance = context.getSharedPreferences("SharePreferenceUtils", Context.MODE_PRIVATE);
+            mInstance = context.getSharedPreferences("data-speaker", Context.MODE_MULTI_PROCESS);
         }
         return mInstance;
     }

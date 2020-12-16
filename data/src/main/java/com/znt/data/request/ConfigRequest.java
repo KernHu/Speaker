@@ -11,13 +11,14 @@ import com.znt.data.body.LastVersionRequestBody;
 import com.znt.data.body.StatusRequestBody;
 import com.znt.data.body.UpdateRequestBody;
 import com.znt.data.body.WifiRequestBody;
+import com.znt.data.constants.SharePrefConstants;
 import com.znt.data.contact.ConfigContact;
 import com.znt.data.entity.InitConfigInfo;
 import com.znt.data.presenter.ConfigPresenter;
 import com.znt.retrofit.base.BaseRequest;
 import com.znt.retrofit.common.ExceptionTags;
 import com.znt.utils.AppUtils;
-import com.znt.utils.DeviceUtils;
+import com.znt.utils.SharedPrefUtils;
 import com.znt.utils.SystemUtils;
 
 /**
@@ -153,39 +154,13 @@ public class ConfigRequest<T extends Object> extends BaseRequest<ConfigContact.p
     /*******************************************************************/
     @Override
     public void setTerminalInitSuccess(RespBody data) {
-        Log.e("sos", "InitConfigInfo>111>>" + data.toString());
         if (!RespBody.CODE_SUCCESS.equals(data.getResultcode())) {
             setTerminalInitFailure(ExceptionTags.API_ERROR, data.getMessage());
         } else {
             InitConfigInfo info = new Gson().fromJson(data.getData().toString(), InitConfigInfo.class);
-            Log.e("sos", "InitConfigInfo>>>" + info.toString());
-
-            AddboxRequestBody body = new AddboxRequestBody();
-            body.setCode(info.getCode());
-            body.setSoftCode(String.valueOf(AppUtils.getVersionCode(AppBase.getApp())));
-            body.setHardVersion(SystemUtils.getSystemVersion());
-//            body.setTerminalType(AddboxRequestBody.TYPE_BOX);
-//            body.setVolume("10");
-//            body.setVideoWhirl("0");
-//            body.setWifiName(WifiConnectionManager.getInstance(getBaseContext()).getSSID());
-//            //body.setWifiPassword(WifiConnectionManager.getInstance(getBaseContext()).getPassword());
-//            body.setIp(WifiConnectionManager.getInstance(getBaseContext()).getLocalIp());
-//            //body.setNetInfo("");
-//            double[] location = LocationUtils.getLastKnownLocation(getBaseContext());
-//            body.setLatitude(String.valueOf(location[0]));
-//            body.setLongitude(String.valueOf(location[1]));
-//            body.setAddress("SHE");
-//            body.setCountry("China");
-//            body.setProvince("ShenZhen");
-//            body.setRegion("");
-//            body.setOldId("0");
-
-            ConfigRequest
-                    .getInstance()
-                    .setType(ConfigRequest.Type.REQ_ADDBOX)
-                    .setRequestBody(body)
-                    .build();
-            //
+            SharedPrefUtils.putLong(AppBase.getApp(), SharePrefConstants.KEY_ID, 0);
+            //AppBase.getApp().setId(info);
+            Log.e("sos", "setTerminalInitSuccess---InitConfigInfo>>>" + info.toString());
         }
     }
 
@@ -196,12 +171,18 @@ public class ConfigRequest<T extends Object> extends BaseRequest<ConfigContact.p
 
     @Override
     public void setTerminalAddboxSuccess(RespBody data) {
-
+        if (!RespBody.CODE_SUCCESS.equals(data.getResultcode())) {
+            setTerminalInitFailure(ExceptionTags.API_ERROR, data.getMessage());
+        } else {
+//            InitConfigInfo info = new Gson().fromJson(data.getData().toString(), InitConfigInfo.class);
+//            SharedPrefUtils.putLong(AppBase.getApp(), SharePrefConstants.KEY_ID, 0);
+//            Log.e("sos", "setTerminalAddboxSuccess---InitConfigInfo>>>" + info.toString());
+        }
     }
 
     @Override
     public void setTerminalAddboxFailure(String tag, String error) {
-
+        Log.e("sos", "setTerminalAddboxFailure>>>" + tag + ";;error>>>" + error);
     }
 
     @Override

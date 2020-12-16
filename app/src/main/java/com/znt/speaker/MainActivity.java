@@ -7,11 +7,11 @@ import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.RemoteException;
-import android.util.Log;
 
 import com.znt.data.DataBindingBinder;
 import com.znt.data.DataBindingService;
 import com.znt.data.app.AppBase;
+import com.znt.utils.EmptyUtils;
 
 public class MainActivity extends BaseActivity {
 
@@ -45,7 +45,6 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void bindDate() {
         super.bindDate();
-        //mDataBindingAidl.basicTypes();
     }
 
     @Override
@@ -110,11 +109,19 @@ public class MainActivity extends BaseActivity {
     /**********************************************************************************************/
 
     private void loadData() {
-        loadInit();
+
+        //无id时则请求id
+        if (EmptyUtils.isEmpty(AppBase.getApp().getId())) {
+            loadInit();
+            loadAddBox();
+            return;
+        }
+
+
     }
 
     /**
-     *
+     *  第一次初始化
      */
     private void loadInit() {
         if (isInit) {
@@ -131,7 +138,7 @@ public class MainActivity extends BaseActivity {
     }
 
     /**
-     *
+     *  第一次添加盒子
      */
     private void loadAddBox() {
         try {
